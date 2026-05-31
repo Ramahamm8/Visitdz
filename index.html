@@ -79,25 +79,10 @@
         <p class="section-subtitle">Stunning places to clear your mind</p>
 
         <div class="grid-container" id="cardsGrid">
-            
-            <div class="destination-card" data-type="resort" data-wilaya="21">
-                <div class="card-image-wrapper">
-                    <img src="sirdjina1.jpeg" alt="Chrea" class="card-main-image">
-                    <button class="heart-favorite-btn"><i class="fa-regular fa-heart"></i></button>
-                </div>
-                <div class="card-info-content">
-                    <div class="card-meta-top">
-                        <span class="card-location-tag"><i class="fa-solid fa-location-dot"></i> Skikda (21)</span>
-                        <div class="card-rating-badge"><i class="fa-solid fa-star"></i> <span>4.9</span></div>
-                    </div>
-                    <h3 class="card-destination-title">Île de Srigina</h3>
-                    <p class="card-short-description">L'île de Srigina est un joyau touristique préservé au large de Skikda, célèbre pour son phare historique.</p>
-                    <div class="card-price-row">
-                        <span class="card-price-amount">Gratuit</span>
-                    </div>
-                </div>
+            <div class="loading-container" id="loadingContainer">
+                <div class="spinner"></div>
+                <p>Connexion à Firebase...</p>
             </div>
-
         </div>
     </section>
 
@@ -105,6 +90,9 @@
         <div class="dev-signature">by hammache ramdane</div>
         <div class="footer-text">&copy; 2026 VisitDZ Tourism. All rights reserved.</div>
     </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
     <script src="script.js"></script>
 </body>
