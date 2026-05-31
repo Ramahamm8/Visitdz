@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    
-    // ⚠️ استبدل هذه الإعدادات بمفاتيح مشروعك الخاصة من Firebase Console
+      Firebase Console
     const firebaseConfig = {
         apiKey: "AIzaSy...",
         authDomain: "visitdz-...",
@@ -10,13 +9,13 @@ document.addEventListener("DOMContentLoaded", function() {
         appId: "..."
     };
 
-    // تشغيل الفايربيز
+
     if (!firebase.apps.length) {
         firebase.initializeApp(firebaseConfig);
     }
     const db = firebase.firestore();
 
-    // عناصر الواجهة
+    
     const menuToggle = document.getElementById("menuToggle");
     const sidebarMenu = document.getElementById("sidebarMenu");
     const sidebarOverlay = document.getElementById("sidebarOverlay");
@@ -27,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let allDestinations = [];
 
-    // تشغيل القائمة الجانبية
+
     if (menuToggle && sidebarMenu && sidebarOverlay) {
         menuToggle.addEventListener("click", () => {
             sidebarMenu.classList.toggle("active");
@@ -41,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // جلب البيانات من Firebase Firestore
+    
     db.collection("destinations").get().then((querySnapshot) => {
         if (loadingContainer) loadingContainer.remove(); // إخفاء الـ Spinner
 
@@ -57,9 +56,8 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // دالة عرض البطاقات بناءً على البيانات المستلمة
     function displayCards(data) {
-        // مسح البطاقات القديمة مع ترك الـ spinner إذا وجد
+        
         const items = cardsGrid.querySelectorAll('.destination-card');
         items.forEach(item => item.remove());
 
@@ -92,7 +90,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // نظام الفلترة عبر التصنيفات (Tout / Les complexes)
     if (categoriesBar) {
         categoriesBar.addEventListener("click", (e) => {
             const box = e.target.closest('.category-box');
@@ -105,7 +102,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // نظام الفلترة عبر قائمة الولايات
     if (wilayaSelect) {
         wilayaSelect.addEventListener("change", filterData);
     }
