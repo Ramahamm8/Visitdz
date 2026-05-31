@@ -1,16 +1,17 @@
 document.addEventListener("DOMContentLoaded", function() {
     
-    // ⚠️ استبدل هذه الإعدادات بمفاتيح مشروعك الخاصة من Firebase Console
+    // مفاتيح مشروعك الحقيقية والسرية التي استخرجتها للتو
     const firebaseConfig = {
-        apiKey: "AIzaSy...",
-        authDomain: "visitdz-...",
-        projectId: "visitdz-...",
-        storageBucket: "visitdz-...",
-        messagingSenderId: "...",
-        appId: "..."
+        apiKey: "AIzaSyB9urygXT0zXJpyZR5kw7K0_CoRahiewSU",
+        authDomain: "visitdz.firebaseapp.com",
+        projectId: "visitdz",
+        storageBucket: "visitdz.firebasestorage.app",
+        messagingSenderId: "874236120088",
+        appId: "1:874236120088:web:77f06bdac8573bd58dc76d",
+        measurementId: "G-JTKGWLYL6C"
     };
 
-    // تشغيل الفايربيز
+    // تشغيل الفايربيز بالنسخة المتوافقة مع موقعك
     if (!firebase.apps.length) {
         firebase.initializeApp(firebaseConfig);
     }
@@ -27,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let allDestinations = [];
 
-    // تشغيل القائمة الجانبية
+    // تشغيل القائمة الجانبية (Sidebar)
     if (menuToggle && sidebarMenu && sidebarOverlay) {
         menuToggle.addEventListener("click", () => {
             sidebarMenu.classList.toggle("active");
@@ -41,9 +42,9 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // جلب البيانات من Firebase Firestore
+    // جلب البيانات ديناميكياً من Firebase Firestore
     db.collection("destinations").get().then((querySnapshot) => {
-        if (loadingContainer) loadingContainer.remove(); // إخفاء الـ Spinner
+        if (loadingContainer) loadingContainer.remove(); // إخفاء مؤشر التحميل عند نجاح الاتصال
 
         querySnapshot.forEach((doc) => {
             allDestinations.push({ id: doc.id, ...doc.data() });
@@ -53,18 +54,18 @@ document.addEventListener("DOMContentLoaded", function() {
     }).catch((error) => {
         console.error("Error getting documents: ", error);
         if (loadingContainer) {
-            loadingContainer.innerHTML = `<p style="color:red;">Erreur de connexion.</p>`;
+            loadingContainer.innerHTML = `<p style="color:red; text-align:center; padding:20px;">Erreur de connexion à Firebase.</p>`;
         }
     });
 
-    // دالة عرض البطاقات بناءً على البيانات المستلمة
+    // دالة إنشاء وعرض بطاقات الأماكن السياحية
     function displayCards(data) {
-        // مسح البطاقات القديمة مع ترك الـ spinner إذا وجد
+        // مسح أي بطاقات قديمة
         const items = cardsGrid.querySelectorAll('.destination-card');
         items.forEach(item => item.remove());
 
         if (data.length === 0) {
-            cardsGrid.innerHTML += `<p class="no-data">Aucune destination trouvée.</p>`;
+            cardsGrid.innerHTML += `<p class="no-data" style="text-align:center; width:100%; grid-column:1/-1; padding:20px;">Aucune destination trouvée.</p>`;
             return;
         }
 
