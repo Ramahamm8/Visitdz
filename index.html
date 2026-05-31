@@ -1,17 +1,16 @@
+    
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="fr" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Discover Algeria - VisitDZ</title>
+    
     <meta name="description" content="VisitDZ - Découvrez les meilleures destinations touristiques en Algérie.">
-    <meta name="keywords" content="VisitDZ, Visit DZ, Tourism Algeria, Plages Skikda, Voyage Algerie, السياحة في الجزائر">
+    <meta name="keywords" content="VisitDZ, Tourism Algeria, Plages Skikda, Voyage Algerie">
     <meta name="author" content="hammache ramdane">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     
     <link rel="stylesheet" href="style.css">
 </head>
@@ -23,7 +22,6 @@
         <a href="#" class="sidebar-menu-item"><i class="fa-solid fa-compass"></i> Explorer</a>
         <a href="#" class="sidebar-menu-item"><i class="fa-solid fa-heart"></i> Favoris</a>
         <a href="#" class="sidebar-menu-item"><i class="fa-solid fa-user-gear"></i> Paramètres</a>
-        <a href="#" class="sidebar-menu-item" style="color: #e74c3c;"><i class="fa-solid fa-right-to-bracket"></i> Connexion</a>
     </nav>
 
     <section class="hero-section">
@@ -35,9 +33,6 @@
                     </div>
                     <a href="#" class="logo-container">
                         <span class="logo-text">visitdz</span>
-                        <svg class="parasol-icon" viewBox="0 0 24 24">
-                            <path d="M12 2c4.97 0 9 4.03 9 9 0 .41-.28.77-.67.87L13 13.93V20c0 .55-.45 1-1 1s-1-.45-1-1v-6.07L3.67 11.87c-.39-.1-.67-.46-.67-.87 0-4.97 4.03-9 9-9zm0 2c-3.53 0-6.43 2.61-6.92 6l6.92 1.73L18.92 10c-.49-3.39-3.39-6-6.92-6z"/>
-                        </svg>
                     </a>
                 </div>
                 <div class="header-right-side">
@@ -50,13 +45,8 @@
             <div class="search-bar-container">
                 <div class="search-select-wrapper">
                     <select class="search-select" id="wilayaSelect">
-                        <option value="all" selected>Wilaya</option>
-                        <option value="15">15 - Tizi Ouzou</option>
-                        <option value="06">06 - Béjaïa</option>
-                        <option value="13">13 - Tlemcen</option>
-                        <option value="18">18 - Jijel</option>
+                        <option value="all">Wilaya</option>
                         <option value="21">21 - Skikda</option>
-                        <option value="11">11 - Tamanrasset</option>
                     </select>
                 </div>
                 <div class="search-divider"></div>
@@ -78,25 +68,9 @@
             <i class="fa-solid fa-globe"></i>
             <span>Tout</span>
         </div>
-        <div class="category-box" data-type="hotel">
-            <i class="fa-solid fa-hotel"></i>
-            <span>Hôtels</span>
-        </div>
         <div class="category-box" data-type="resort">
             <i class="fa-solid fa-umbrella-beach"></i>
             <span>Les complexes</span>
-        </div>
-        <div class="category-box" data-type="museum">
-            <i class="fa-solid fa-building-columns"></i>
-            <span>Musées</span>
-        </div>
-        <div class="category-box" data-type="park">
-            <i class="fa-solid fa-tree"></i>
-            <span>Parcs & Forêts</span>
-        </div>
-        <div class="category-box" data-type="guesthouse">
-            <i class="fa-solid fa-house-chimney-user"></i>
-            <span>Chambres d'hôtes</span>
         </div>
     </div>
 
@@ -105,46 +79,30 @@
         <p class="section-subtitle">Stunning places to clear your mind</p>
 
         <div class="grid-container" id="cardsGrid">
-            <div class="loading-spinner" id="loadingSpinner"><i class="fa-solid fa-circle-notch"></i> Connexion à Firebase...</div>
-            <div class="no-results-msg" id="noResults">Aucune destination trouvée pour ce choix.</div>
+            
+            <div class="destination-card" data-type="resort" data-wilaya="21">
+                <div class="card-image-wrapper">
+                    <img src="sirdjina1.jpeg" alt="Chrea" class="card-main-image">
+                    <button class="heart-favorite-btn"><i class="fa-regular fa-heart"></i></button>
+                </div>
+                <div class="card-info-content">
+                    <div class="card-meta-top">
+                        <span class="card-location-tag"><i class="fa-solid fa-location-dot"></i> Skikda (21)</span>
+                        <div class="card-rating-badge"><i class="fa-solid fa-star"></i> <span>4.9</span></div>
+                    </div>
+                    <h3 class="card-destination-title">Île de Srigina</h3>
+                    <p class="card-short-description">L'île de Srigina est un joyau touristique préservé au large de Skikda, célèbre pour son phare historique.</p>
+                    <div class="card-price-row">
+                        <span class="card-price-amount">Gratuit</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <div class="details-modal" id="detailsModal">
-        <div class="modal-slider-container">
-            <button class="modal-close-btn" id="closeModalBtn"><i class="fa-solid fa-chevron-left"></i></button>
-            <button class="slider-nav-btn prev" id="prevImgBtn"><i class="fa-solid fa-chevron-left"></i></button>
-            <button class="slider-nav-btn next" id="nextImgBtn"><i class="fa-solid fa-chevron-right"></i></button>
-            <div class="modal-images-track" id="modalImagesTrack"></div>
-            <div class="slider-dots-indicator" id="sliderDots"></div>
-        </div>
-        
-        <div class="modal-body">
-            <span class="modal-tag" id="modalCategory">Forest</span>
-            <h2 class="modal-main-title" id="modalTitle">Tizi Ouzou</h2>
-            <div class="modal-meta-row">
-                <div class="modal-rating-box"><i class="fa-solid fa-star"></i> <span id="modalRating">5.0</span></div>
-                <div>·</div>
-                <div>Algeria Tourism Recommended</div>
-            </div>
-            <h3 class="modal-section-title">À propos de ce lieu</h3>
-            <p class="modal-description" id="modalDesc">Lieu Description...</p>
-        </div>
-        
-        <div class="modal-footer-bar">
-            <div class="modal-price-display"><span id="modalPrice">Free Entry</span><br><span>Total estimé</span></div>
-            <button class="btn-book-now">Réserver</button>
-        </div>
-    </div>
-
     <footer>
         <div class="dev-signature">by hammache ramdane</div>
-        <div class="footer-social-icons">
-            <a href="#" class="social-link facebook"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" class="social-link instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" class="social-link twitter"><i class="fa-brands fa-twitter"></i></a>
-            <a href="#" class="social-link contact-us"><i class="fa-solid fa-envelope"></i></a>
-        </div>
         <div class="footer-text">&copy; 2026 VisitDZ Tourism. All rights reserved.</div>
     </footer>
 
