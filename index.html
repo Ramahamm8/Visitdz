@@ -6,24 +6,530 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Discover Algeria - VisitDZ</title>
     
-    <meta name="description" content="VisitDZ - Découvrez les meilleures destinations touristiques en Algérie.">
-    <meta name="keywords" content="VisitDZ, Tourism Algeria, Plages Skikda, Voyage Algerie">
+    <!-- Meta Tags for SEO -->
+    <meta name="description" content="Découvrez les meilleures destinations touristiques en Algérie.">
     <meta name="author" content="hammache ramdane">
-
+    
+    <!-- Font Awesome for beautiful icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ==========================================================================
+           1. Base Styles & Reset
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent; /* Remove blue highlight tap on mobile */
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #222222;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Hero Section Styling */
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.75)), 
+                        url('1000013895.jpg') no-repeat center center/cover;
+            height: 65vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        /* ==========================================================================
+           2. Responsive Header (Amazon Style Layout)
+           ========================================================================== */
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #131921;
+            padding: 12px 5%;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        }
+
+        .header-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .header-left-side {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .menu-toggle {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 22px;
+            height: 16px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 100%;
+            height: 2px;
+            background-color: #fff;
+            border-radius: 2px;
+            transition: 0.3s ease;
+        }
+
+        /* Sidebar Toggle Animation to 'X' */
+        .menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .menu-toggle.open span:nth-child(2) { opacity: 0; }
+        .menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 4px;
+        }
+
+        .logo-text {
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            font-family: 'Arial', sans-serif;
+            text-transform: lowercase;
+        }
+
+        .parasol-icon {
+            width: 22px;
+            height: 22px;
+            fill: #f08804;
+            margin-top: 2px;
+        }
+
+        .sign-in-link {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 8px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .search-bar-container {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 6px 12px;
+            width: 100%;
+        }
+
+        .search-select-wrapper {
+            position: relative;
+            max-width: 130px;
+            width: 100%;
+        }
+
+        .search-select {
+            width: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            color: #333;
+            font-weight: 600;
+            cursor: pointer;
+            appearance: none;
+        }
+
+        .search-divider {
+            width: 1px;
+            height: 18px;
+            background-color: #ddd;
+            margin: 0 12px;
+        }
+
+        .location-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex: 1;
+            background: transparent;
+            border: none;
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .location-btn i { color: #f08804; }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 15px rgba(0,0,0,0.6);
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            max-width: 600px;
+            color: #f0f0f0;
+        }
+
+        .btn-explore {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #008751;
+            color: #fff;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 50px;
+            transition: transform 0.2s;
+        }
+        .btn-explore:hover {
+            transform: scale(1.05);
+        }
+
+        /* ==========================================================================
+           3. Premium Categories Slider Section (Airbnb Icon Style)
+           ========================================================================== */
+        .categories-container {
+            display: flex;
+            gap: 25px;
+            padding: 20px 4%;
+            background-color: #ffffff;
+            border-bottom: 1px solid #ebebeb;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+        }
+        .categories-container::-webkit-scrollbar { display: none; }
+
+        .category-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            color: #717171;
+            min-width: 75px;
+            text-align: center;
+            transition: all 0.25s ease;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 8px;
+        }
+        .category-box i { font-size: 20px; }
+        .category-box span { font-size: 12px; font-weight: 600; white-space: nowrap; }
+        
+        .category-box:hover, .category-box.active {
+            color: #222222;
+            border-bottom-color: #222222;
+        }
+
+        /* ==========================================================================
+           4. Sidebar Menu
+           ========================================================================== */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background-color: #ffffff;
+            z-index: 999;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.2);
+            transition: left 0.3s ease-in-out;
+            padding-top: 80px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar.active { left: 0; }
+        .sidebar-menu-item {
+            padding: 16px 24px;
+            color: #222222;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s;
+        }
+        .sidebar-menu-item:hover { background-color: #f7f7f7; color: #008751; }
+        .sidebar-menu-item i { width: 20px; font-size: 18px; color: #717171; }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(2px);
+            z-index: 998;
+            display: none;
+        }
+        .sidebar-overlay.active { display: block; }
+
+        /* ==========================================================================
+           5. Posts Grid Layout (Airbnb Style)
+           ========================================================================== */
+        .destinations { padding: 30px 4%; }
+        .section-title { font-size: 1.8rem; margin-bottom: 8px; color: #222; text-align: left; }
+        .section-subtitle { color: #717171; margin-bottom: 25px; font-size: 1rem; text-align: left; }
+
+        .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+
+        .card { background: transparent; text-align: left; cursor: pointer; }
+        .card-img-wrapper { position: relative; aspect-ratio: 1 / 1; width: 100%; overflow: hidden; border-radius: 20px; }
+        .card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+        .card:hover .card-img { transform: scale(1.05); }
+
+        .like-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 32px;
+            height: 32px;
+            background: transparent; 
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .like-btn i { font-size: 24px; color: rgba(255, 255, 255, 0.9); text-shadow: 0 2px 6px rgba(0,0,0,0.4); }
+        .like-btn.liked i { color: #e74c3c; text-shadow: none; }
+
+        .badge-featured {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background-color: rgba(255, 255, 255, 0.95);
+            color: #222222;
+            padding: 6px 12px;
+            border-radius: 14px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .card-content { padding: 10px 2px 0px 2px; }
+        .card-title-row { display: flex; justify-content: space-between; align-items: flex-start; }
+        .card-title { font-size: 14px; color: #222222; font-weight: 600; }
+        .card-rating { font-size: 13px; color: #222222; display: flex; align-items: center; gap: 3px; }
+        .card-rating i { color: #f08804; }
+        .card-text { color: #717171; font-size: 13px; margin-top: 2px; }
+        .card-price-info { font-size: 13px; color: #222222; font-weight: 600; margin-top: 2px; }
+
+        .no-results-msg { display: none; font-size: 1.1rem; color: #717171; padding: 40px; grid-column: 1 / -1; text-align: center; }
+
+        /* ==========================================================================
+           6. Premium Dynamic Image Carousel (Details Modal)
+           ========================================================================== */
+        .details-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            z-index: 2000;
+            display: none;
+            overflow-y: auto;
+            flex-direction: column;
+        }
+        .details-modal.open { display: flex; animation: slideUp 0.4s ease; }
+
+        .modal-slider-container {
+            position: relative;
+            width: 100%;
+            height: 45vh;
+            background-color: #000;
+            overflow: hidden;
+        }
+
+        .modal-images-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden; /* JavaScript & Touch control */
+            scroll-behavior: smooth;
+        }
+
+        .slider-img {
+            min-width: 100%;
+            height: 100%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .slider-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            background-color: rgba(255, 255, 255, 0.85);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+        .slider-nav-btn.prev { left: 16px; }
+        .slider-nav-btn.next { right: 16px; }
+
+        /* Hide nav buttons on small mobile touch screens */
+        @media (max-width: 480px) {
+            .slider-nav-btn { display: none; }
+        }
+
+        .slider-dots-indicator {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.35);
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+            background-color: rgba(255, 255, 255, 0.45);
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+        .dot.active {
+            background-color: #ffffff;
+            transform: scale(1.3);
+            width: 9px;
+            height: 9px;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 44px;
+            height: 44px;
+            background-color: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 20;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .modal-body { padding: 24px 6%; display: flex; flex-direction: column; gap: 16px; }
+        .modal-tag { align-self: flex-start; background-color: #e6f3ed; color: #008751; padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 700; }
+        .modal-main-title { font-size: 24px; color: #222; font-weight: 700; }
+        
+        .modal-meta-row { display: flex; align-items: center; gap: 15px; font-size: 14px; color: #717171; border-bottom: 1px solid #eee; padding-bottom: 16px; }
+        .modal-rating-box { color: #222; font-weight: 600; display: flex; align-items: center; gap: 4px; }
+
+        .modal-section-title { font-size: 18px; font-weight: 600; color: #222; margin-top: 10px; }
+        .modal-description { font-size: 15px; color: #484848; line-height: 1.6; text-align: justify; }
+
+        .modal-footer-bar {
+            margin-top: auto;
+            position: sticky;
+            bottom: 0;
+            background-color: #ffffff;
+            border-top: 1px solid #eee;
+            padding: 16px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+            z-index: 30;
+        }
+
+        .modal-price-display { font-size: 16px; color: #222; font-weight: 700; }
+        .modal-price-display span { font-size: 13px; color: #717171; font-weight: 400; }
+        .btn-book-now { background-color: #f08804; color: #fff; border: none; padding: 12px 28px; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; }
+
+        /* ==========================================================================
+           7. Footer & Developer Credit
+           ========================================================================== */
+        footer { background-color: #131921; color: #fff; text-align: center; padding: 30px 20px; margin-top: auto; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+        
+        .dev-signature {
+            font-size: 14px;
+            color: #f08804;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            font-style: italic;
+            border-bottom: 1px dashed rgba(240, 136, 4, 0.4);
+            padding-bottom: 4px;
+        }
+
+        .footer-social-icons { display: flex; gap: 15px; margin-top: 4px; }
+        .social-link { color: #fff; font-size: 18px; width: 38px; height: 38px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }
+        .social-link.facebook { background-color: #1877f2; }
+        .social-link.instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        .social-link.twitter { background-color: #1da1f2; }
+        .social-link.contact-us { background-color: #25d366; }
+        .footer-text { font-size: 13px; color: #aaa; }
+
+        /* Responsive Viewports Optimization */
+        @media (min-width: 768px) {
+            .grid-container { grid-template-columns: repeat(4, 1fr); gap: 24px; }
+            .hero-content h1 { font-size: 3.5rem; }
+            .details-modal { width: 500px; left: 50%; transform: translateX(-50%); box-shadow: 0 0 30px rgba(0,0,0,0.3); }
+            @keyframes slideUp { from { transform: translate(-50%, 100%); } to { transform: translate(-50%, 0); } }
+        }
+    </style>
 </head>
 <body>
 
+    <!-- Sidebar Overlay & Menu -->
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
     <nav class="sidebar" id="sidebarMenu">
         <a href="#" class="sidebar-menu-item"><i class="fa-solid fa-house"></i> Accueil</a>
         <a href="#" class="sidebar-menu-item"><i class="fa-solid fa-compass"></i> Explorer</a>
         <a href="#" class="sidebar-menu-item"><i class="fa-solid fa-heart"></i> Favoris</a>
         <a href="#" class="sidebar-menu-item"><i class="fa-solid fa-user-gear"></i> Paramètres</a>
+        <a href="#" class="sidebar-menu-item" style="color: #e74c3c;"><i class="fa-solid fa-right-to-bracket"></i> Connexion</a>
     </nav>
 
+    <!-- Top Hero Section -->
     <section class="hero-section">
         <header>
             <div class="header-top-row">
@@ -33,6 +539,9 @@
                     </div>
                     <a href="#" class="logo-container">
                         <span class="logo-text">visitdz</span>
+                        <svg class="parasol-icon" viewBox="0 0 24 24">
+                            <path d="M12 2c4.97 0 9 4.03 9 9 0 .41-.28.77-.67.87L13 13.93V20c0 .55-.45 1-1 1s-1-.45-1-1v-6.07L3.67 11.87c-.39-.1-.67-.46-.67-.87 0-4.97 4.03-9 9-9zm0 2c-3.53 0-6.43 2.61-6.92 6l6.92 1.73L18.92 10c-.49-3.39-3.39-6-6.92-6z"/>
+                        </svg>
                     </a>
                 </div>
                 <div class="header-right-side">
@@ -42,15 +551,25 @@
                 </div>
             </div>
 
+            <!-- Custom Amazon-style Search/Filter Bar -->
             <div class="search-bar-container">
                 <div class="search-select-wrapper">
                     <select class="search-select" id="wilayaSelect">
-                        <option value="all">Wilaya</option>
+                        <option value="all" selected>Wilaya</option>
+<option value="15">15 - Tizi Ouzou</option>
+  <option value="06">06 - Béjaïa</option>
+                        <option value="13">13 - Tlemcen</option>
+                        <option value="18">18 - Jijel</option>
                         <option value="21">21 - Skikda</option>
+                        <option value="11">11 - Tamanrasset</option>
+                        <option value="42">42 - Tipaza</option>
+                        <option value="05">05 - Batna</option>
+                        <option value="46">46 - Aïn Témouchent</option>
+                        <option value="24">24 - Guelma</option>
                     </select>
                 </div>
                 <div class="search-divider"></div>
-                <button class="location-btn">
+                <button class="location-btn" id="locationBtn">
                     <span>Ma position</span><i class="fa-solid fa-location-dot"></i>
                 </button>
             </div>
@@ -63,37 +582,459 @@
         </div>
     </section>
 
+    <!-- Airbnb-style Categories Bar Slider -->
     <div class="categories-container" id="categoriesBar">
         <div class="category-box active" data-type="all">
             <i class="fa-solid fa-globe"></i>
             <span>Tout</span>
         </div>
+        <div class="category-box" data-type="hotel">
+            <i class="fa-solid fa-hotel"></i>
+            <span>Hôtels</span>
+        </div>
         <div class="category-box" data-type="resort">
             <i class="fa-solid fa-umbrella-beach"></i>
             <span>Les complexes</span>
         </div>
+        <div class="category-box" data-type="museum">
+            <i class="fa-solid fa-building-columns"></i>
+            <span>Musées & Ruines</span>
+        </div>
+        <div class="category-box" data-type="park">
+            <i class="fa-solid fa-tree"></i>
+            <span>Parcs & Forêts</span>
+        </div>
+        <div class="category-box" data-type="guesthouse">
+            <i class="fa-solid fa-house-chimney-user"></i>
+            <span>Chambres d'hôtes</span>
+        </div>
     </div>
 
+    <!-- Main Section Destinations Content -->
     <section class="destinations" id="destinations">
         <h2 class="section-title">Top Attractions</h2>
         <p class="section-subtitle">Stunning places to clear your mind</p>
 
         <div class="grid-container" id="cardsGrid">
-            <div class="loading-container" id="loadingContainer">
-                <div class="spinner"></div>
-                <p>Connexion à Firebase...</p>
-            </div>
+            <div class="no-results-msg" id="noResults">Aucune destination trouvée pour ce choix.</div>
         </div>
     </section>
 
+    <!-- Premium Slide-Up Details Modal -->
+    <div class="details-modal" id="detailsModal">
+        <div class="modal-slider-container">
+            <button class="modal-close-btn" id="closeModalBtn"><i class="fa-solid fa-chevron-left"></i></button>
+            
+            <button class="slider-nav-btn prev" id="prevImgBtn"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="slider-nav-btn next" id="nextImgBtn"><i class="fa-solid fa-chevron-right"></i></button>
+            
+            <div class="modal-images-track" id="modalImagesTrack"></div>
+            <div class="slider-dots-indicator" id="sliderDots"></div>
+        </div>
+        
+        <div class="modal-body">
+            <span class="modal-tag" id="modalCategory">Forest</span>
+            <h2 class="modal-main-title" id="modalTitle">Tizi Ouzou</h2>
+            <div class="modal-meta-row">
+                <div class="modal-rating-box"><i class="fa-solid fa-star"></i> <span id="modalRating">5.0</span></div>
+                <div>·</div>
+                <div id="modalWilayaLabel">Algeria Tourism Recommended</div>
+            </div>
+            <h3 class="modal-section-title">À propos de ce lieu</h3>
+            <p class="modal-description" id="modalDesc">Lieu Description...</p>
+        </div>
+        
+        <div class="modal-footer-bar">
+            <div class="modal-price-display"><span id="modalPrice">Free Entry</span><br><span>Total estimé</span></div>
+            <button class="btn-book-now">Réserver</button>
+        </div>
+    </div>
+
+    <!-- Page Footer with Signature -->
     <footer>
         <div class="dev-signature">by hammache ramdane</div>
+        
+        <div class="footer-social-icons">
+            <a href="#" class="social-link facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="social-link instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-link twitter"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" class="social-link contact-us"><i class="fa-solid fa-envelope"></i></a>
+        </div>
         <div class="footer-text">&copy; 2026 VisitDZ Tourism. All rights reserved.</div>
     </footer>
 
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <!-- Local Offline Database Logic -->
+    <script>
+        const destinationsData = [
+            {
+                id: 1,
+                wilaya: "15",
+                type: "park",
+                category: "Parcs & Forêts",
+                locationName: "Tizi Ouzou",
+                description: "Le Lac Vert de Yakouren est un véritable havre de paix niché au cœur d'une forêt dense de chênes-lièges. Cet écosystème unique offre un climat frais et apaisant, idéal pour les randonnées en famille, la méditation en pleine nature et l'observation d'animaux sauvages locaux comme les singes magots.",
+                price: "Free Entry",
+                rating: "5,0",
+                image: "13333737.jpeg",
+                gallery: ["13333737.jpeg", "1726627.jpeg", "166262525.jpg", "72626216.jpeg"],
+                isFeatured: true
+            },
+            {
+                id: 2,
+                wilaya: "06",
+                type: "park",
+                category: "Parcs & Forêts",
+                locationName: "Béjaïa",
+                description: "Le Lac Noir, situé dans la majestueuse forêt d'Akfadou à plus de 1200 mètres d'altitude, est une merveille biologique mystique. Entouré d'arbres séculaires géants, ce lac naturel offre un paysage féerique qui change de couleurs au fil des saisons, attirant les aventuriers en quête de calme absolu.",
+                price: "700 DA / Tour",
+                rating: "4,9",
+                image: "263627272.jpeg",
+                gallery: ["263627272.jpeg", "1515162.jpeg", "6162166.jpeg", "151516.jpeg"],
+                isFeatured: false
+            },
+            {
+                id: 3,
+                wilaya: "13",
+                type: "resort",
+                category: "Les complexes",
+                locationName: "Tlemcen",
+                description: "La plage sauvage de Berbjani est l'un des secrets les mieux gardés du littoral de Tlemcen. Avec ses eaux turquoises ultra-transparentes et ses impressionnantes falaises rocheuses sculptées par la mer, c'est l'endroit parfait pour admirer un coucher de soleil spectaculaire loin de la foule urbaine.",
+                price: "Beautiful View",
+                rating: "4,8",
+                image: "1615226.jpeg",
+                gallery: ["1615226.jpeg", "72728282.jpeg", "6272726261.jpg", "51516116.jpeg"],
+                isFeatured: false
+            },
+            {
+                id: 4,
+                wilaya: "18",
+                type: "resort",
+                category: "Les complexes",
+                locationName: "Jijel",
+                description: "Ziama Mansouriah combine de manière spectaculaire la beauté sauvage des forêts méditerranéennes et la splendeur des plages de sable doré. Réputée pour ses grottes merveilleuses et ses criques vierges, c'est une destination incontournable pour les amateurs de plongée et de paysages côtiers sauvages.",
+                price: "Highly Rated",
+                rating: "5,0",
+                image: "191918272726.jpeg",
+                gallery: ["191918272726.jpeg", "74689577_n.jpg", "74689577_n.jpg"],
+                isFeatured: false
+            },
+            {
+                id: 5,
+                wilaya: "21",
+                type: "resort",
+                category: "Les complexes",
+                locationName: "Skikda",
+                description: "L'île de Srigina est un joyau maritime situé au large de Skikda, célèbre pour son phare historique mythique datant du XIXe siècle. Accessible par bateau, cette île mystérieuse offre des eaux cristallines idéales pour la plongée sous-marine, des récifs coralliens préservés et une vue panoramique imprenable sur tout le golfe.",
+                price: "1500 DA / Boat",
+                rating: "4,9",
+                image: "sirdjina1.jpeg",
+                gallery: ["sirdjina1.jpeg", "sirdjina2.jpeg", "sirdjina3.jpeg", "sirdjina4.jpeg"],
+                isFeatured: true
+            },
+            {
+                id: 6,
+                wilaya: "11",
+                type: "museum",
+                category: "Musées & Nature",
+                locationName: "Tamanrasset",
+                description: "Le Hoggar et le Tassili n'Ajjer représentent l'un des plus grands musées à ciel ouvert au monde. Entre les pics volcaniques sombres de l'Assekrem et les immenses forêts de pierre du Tassili, ce paysage lunaire magique abrite des milliers de gravures rupestres préhistoriques et offre le plus beau lever de soleil de la planète.",
+                price: "Safari Price",
+                rating: "5,0",
+                image: "hoggar1.jpeg",
+                gallery: ["hoggar1.jpeg", "hoggar2.jpeg", "hoggar3.jpeg", "hoggar4.jpeg"],
+                isFeatured: true
+            },
+            /* ==========================================================================
+               الأماكن الأربعة الجديدة المطلوبة بالتفصيل
+               ========================================================================== */
+            {
+                id: 7,
+                wilaya: "42",
+                type: "resort",
+                category: "Les complexes",
+                locationName: "Tipaza",
+                description: "Le complexe touristique C.E.T. Tipaza (le fameux Complexe de la Corne d'Or / S.E.T) est un chef-d'œuvre architectural pieds dans l'eau. Imaginé par le célèbre architecte Fernand Pouillon, ce complexe d'exception épouse les courbes de la baie méditerranéenne et offre des bungalows de style traditionnel, des piscines d'eau de mer et des plages privées idylliques.",
+                price: "Entrée Réservée",
+                rating: "4,7",
+                image: "72727266.jpg", // الصورة الأولى للواجهة
+                gallery: ["72727266.jpg", "2772727.jpeg", "1727262.jpeg"], // الباقي للمعرض الداخلي
+                isFeatured: true
+            },
+            {
+                id: 8,
+                wilaya: "05",
+                type: "museum",
+                category: "Musées & Ruines",
+                locationName: "Batna",
+                description: "Timgad (appelée aussi Thamugadi) est une ancienne cité romaine construite sous le règne de l'empereur Trajan. Classée au patrimoine mondial de l'UNESCO, c'est un exemple frappant d'urbanisme romain avec son arc de triomphe majestueux, son forum dallé, son théâtre antique de 3500 places et son plan en damier remarquablement conservé.",
+                price: "150 DA Entry",
+                rating: "5,0",
+                image: "17626262626.jpeg", // الصورة الأولى للواجهة
+                gallery: ["17626262626.jpeg", "172777.jpeg", "73728228.jpeg", "2827272626.jpeg"], // الباقي للمعرض الداخلي
+                isFeatured: true
+            },
+            {
+                id: 9,
+                wilaya: "46",
+                type: "resort",
+                category: "Les complexes",
+                locationName: "Aïn Témouchent",
+                description: "L'île de Leila (connue sous le nom d'île d'en face à Rachgoun) est une merveille écologique située à quelques encablures de la plage de Rachgoun. Cette île préservée abrite un magnifique phare construit en 1870, des fonds marins incroyablement riches parfaits pour la plongée, ainsi qu'une faune ornithologique migratoire sauvage d'une beauté rare.",
+                price: "1200 DA / Boat",
+                rating: "4,8",
+                image: "2772272626.jpeg", // الصورة الأولى للواجهة
+                gallery: ["2772272626.jpeg", "727272.jpeg", "6262626.jpeg", "82828272.jpeg"], // الباقي للمعرض الداخلي
+                isFeatured: false
+            },
+            {
+                id: 10,
+                wilaya: "24",
+                type: "museum",
+                category: "Musées & Ruines",
+                locationName: "Guelma",
+                description: "Le théâtre romain de Guelma (l'antique Calama) est un monument d'une beauté architecturale saisissante. Construit au flanc de la colline au IIe siècle de notre ère, il a été merveilleusement restauré au début du XXe siècle. Ce site d'exception abrite également un musée archéologique national regroupant de précieuses statues romaines de marbre blanc.",
+                price: "100 DA Entry",
+                rating: "4,9",
+                image: "272626.jpeg", // الصورة الأولى للواجهة
+                gallery: ["272626.jpeg", "2727277.jpeg", "73728228.jpeg"], // الباقي للمعرض الداخلي
+                isFeatured: false
+            }
+        ];
 
-    <script src="script.js"></script>
+        // Global filter states
+        let currentWilaya = 'all';
+        let currentType = 'all';
+
+        // 1. Sidebar Toggle Navigation Control
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebarMenu = document.getElementById('sidebarMenu');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        function toggleSidebar() {
+            menuToggle.classList.toggle('open');
+            sidebarMenu.classList.toggle('active');
+            sidebarOverlay.classList.toggle('active');
+        }
+        menuToggle.onclick = toggleSidebar;
+        sidebarOverlay.onclick = toggleSidebar;
+
+        // 2. DOM Rendering & Filtering Algorithm
+        function filterAndDisplay() {
+            let filtered = destinationsData;
+            
+            if (currentWilaya !== 'all') {
+                filtered = filtered.filter(item => item.wilaya === currentWilaya);
+            }
+            if (currentType !== 'all') {
+                // We're adapting matching types for easy category clicks
+                if (currentType === 'museum') {
+                    filtered = filtered.filter(item => item.type === 'museum');
+                } else if (currentType === 'resort') {
+                    filtered = filtered.filter(item => item.type === 'resort');
+                } else if (currentType === 'park') {
+                    filtered = filtered.filter(item => item.type === 'park');
+                } else {
+                    filtered = filtered.filter(item => item.type === currentType);
+                }
+            }
+            
+            displayCards(filtered);
+        }
+
+        function displayCards(data) {
+            const cardsGrid = document.getElementById('cardsGrid');
+            const noResults = document.getElementById('noResults');
+            if (!cardsGrid) return;
+
+            // Clear old cards dynamically
+            cardsGrid.querySelectorAll('.card').forEach(card => card.remove());
+
+            if (data.length === 0) {
+                if (noResults) noResults.style.display = 'block';
+                return;
+            }
+            if (noResults) noResults.style.display = 'none';
+
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                const featuredBadge = item.isFeatured ? `<div class="badge-featured">Coup de cœur</div>` : '';
+
+                card.innerHTML = `
+                    <div class="card-img-wrapper">
+                        ${featuredBadge}
+                        <button class="like-btn"><i class="fa-regular fa-heart"></i></button>
+                        <img src="${item.image}" alt="${item.locationName}" class="card-img" onerror="this.src='sirdjina1.jpeg'">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title-row">
+                            <h3 class="card-title">${item.category} · ${item.locationName}</h3>
+                            <div class="card-rating"><i class="fa-solid fa-star"></i> ${item.rating}</div>
+                        </div>
+                        <p class="card-text">${item.description.substring(0, 45)}...</p>
+                        <p class="card-price-info">${item.price}</p>
+                    </div>
+                `;
+                
+                // Show modal details upon click
+                card.onclick = () => openDetailsModal(item);
+                cardsGrid.insertBefore(card, noResults);
+            });
+
+            // Like Heart Interactive Mechanics
+            cardsGrid.querySelectorAll('.like-btn').forEach(btn => {
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    btn.classList.toggle('liked');
+                    const icon = btn.querySelector('i');
+                    icon.classList.toggle('fa-regular');
+                    icon.classList.toggle('fa-solid');
+                };
+            });
+        }
+
+        // 3. Carousel Slider Logic & Swipe Gestures
+        const detailsModal = document.getElementById('detailsModal');
+        const track = document.getElementById('modalImagesTrack');
+        const dotsContainer = document.getElementById('sliderDots');
+        let activeIndex = 0;
+        let totalImages = 0;
+
+        function openDetailsModal(item) {
+            track.innerHTML = '';
+            dotsContainer.innerHTML = '';
+            activeIndex = 0;
+            totalImages = item.gallery.length;
+
+            item.gallery.forEach((imgSrc, index) => {
+                const img = document.createElement('img');
+                img.src = imgSrc;
+                img.classList.add('slider-img');
+                img.onerror = function() { this.src = 'sirdjina1.jpeg'; };
+                track.appendChild(img);
+
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (index === 0) dot.classList.add('active');
+                dotsContainer.appendChild(dot);
+            });
+
+            document.getElementById('modalCategory').innerText = item.category;
+            document.getElementById('modalTitle').innerText = item.locationName;
+            document.getElementById('modalRating').innerText = item.rating;
+            document.getElementById('modalDesc').innerText = item.description;
+            document.getElementById('modalPrice').innerHTML = `${item.price} <br><span>Total estimé</span>`;
+            document.getElementById('modalWilayaLabel').innerText = `Wilaya ${item.wilaya} · Algérie Tourisme`;
+            
+            detailsModal.classList.add('open');
+            document.body.style.overflow = 'hidden'; // Freeze main background scroll
+            scrollSliderTo(0);
+        }
+
+        function scrollSliderTo(index) {
+            const width = track.clientWidth || window.innerWidth;
+            track.scrollTo({
+                left: index * width,
+                behavior: 'smooth'
+            });
+            updateDots(index);
+        }
+
+        function updateDots(index) {
+            const dots = dotsContainer.querySelectorAll('.dot');
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === index);
+            });
+        }
+
+        // Click Controls for Slide Change
+        document.getElementById('nextImgBtn').onclick = (e) => {
+            e.stopPropagation();
+            if (activeIndex < totalImages - 1) {
+                activeIndex++;
+                scrollSliderTo(activeIndex);
+            }
+        };
+
+        document.getElementById('prevImgBtn').onclick = (e) => {
+            e.stopPropagation();
+            if (activeIndex > 0) {
+                activeIndex--;
+                scrollSliderTo(activeIndex);
+            }
+        };
+
+        // Swipe Gestures Support (Crucial for Acode Mobile Testing)
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        track.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        track.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const threshold = 50; // minimum distance in pixels to count as swipe
+            if (touchStartX - touchEndX > threshold) {
+                // Swiped Left -> Go Next
+                if (activeIndex < totalImages - 1) {
+                    activeIndex++;
+                    scrollSliderTo(activeIndex);
+                }
+            } else if (touchEndX - touchStartX > threshold) {
+                // Swiped Right -> Go Prev
+                if (activeIndex > 0) {
+                    activeIndex--;
+                    scrollSliderTo(activeIndex);
+                }
+            }
+        }
+
+        // Close Modal Controls
+        document.getElementById('closeModalBtn').onclick = () => {
+            detailsModal.classList.remove('open');
+            document.body.style.overflow = 'auto'; // Unlock main scroll
+        };
+
+        // 4. Setup Airbnb Style Categories Bar Filter Click Listener
+        const categoryBoxes = document.querySelectorAll('.category-box');
+        categoryBoxes.forEach(box => {
+            box.onclick = () => {
+                categoryBoxes.forEach(b => b.classList.remove('active'));
+                box.classList.add('active');
+                currentType = box.getAttribute('data-type');
+                filterAndDisplay();
+            };
+        });
+
+        // 5. Select Dropdown Wilaya Engine setup
+        const wilayaSelect = document.getElementById('wilayaSelect');
+        if (wilayaSelect) {
+            wilayaSelect.onchange = (e) => {
+                currentWilaya = e.target.value;
+                filterAndDisplay();
+            };
+        }
+
+        // Interactive "Ma Position" Button Feedback
+        document.getElementById('locationBtn').onclick = () => {
+            const btnSpan = document.getElementById('locationBtn').querySelector('span');
+            btnSpan.innerText = "Recherche...";
+            setTimeout(() => {
+                btnSpan.innerText = "Algeria";
+                currentWilaya = "all";
+                if(wilayaSelect) wilayaSelect.value = "all";
+                filterAndDisplay();
+            }, 800);
+        };
+
+        // Initial Dynamic Content Render Execution
+        displayCards(destinationsData);
+    </script>
 </body>
 </html>
+
